@@ -1,0 +1,111 @@
+<% layout("layouts/boilerplate")%>
+
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 0.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            padding: 0.5rem;
+            border-radius: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter:hover {
+            background-color: #f8f8f8;
+        }
+
+        .filter i {
+            font-size: 1.5rem;
+            color: #555;
+        }
+
+        .filter p {
+            margin: 0;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .active-filter {
+            background-color: #f0f0f0;
+        }
+
+        .filter a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Adjust listing margin */
+        .listing-section {
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            #filters {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+
+
+    <div id="filters">
+        <% const categories=["Trending", "Rooms" , "Iconic Cities" , "Mountains" , "Castles" , "Amazing Pools"
+            , "Camping" , "Farms" , "Arctic" ]; %>
+            <% categories.forEach(cat=> { %>
+                <a href="/listings?category=<%= cat %>" class="filter <%= category === cat ? 'active' : '' %>">
+                    <% if(cat==="Trending" || cat==="Mountains" ) { %>
+                        <div><i class="fa-solid fa-fire"></i></div>
+                        <% } else if(cat==="Rooms" || cat==="Castles" || cat==="Camping" ) { %>
+                            <div><i class="fa-solid fa-bed"></i></div>
+                            <% } else { %>
+                                <div><i class="fa-solid fa-city"></i></div>
+                                <% } %>
+                                    <p>
+                                        <%= cat %>
+                                    </p>
+                </a>
+                <% }) %>
+
+                    <!-- Show All Button -->
+                    <a href="/listings" class="filter <%= !category ? 'active' : '' %>">
+                        <div><i class="fa-solid fa-globe"></i></div>
+                        <p>Show All</p>
+                    </a>
+    </div>
+
+
+
+
+
+    <div class="row new row-cols-lg-3 row-cols-md-3 col-row-sm-1">
+        <% for(let listing of allListings){%>
+            <div class="card row listing-card ">
+                <a href="/listings/<%=listing._id%>">
+                    <img src="<%=listing.image.url%>" class="card-img-top" style="height:16rem; " alt="listing-image">
+                    <div class="card-body">
+                        <p>
+                            <b>
+                                <%=listing.title%>
+                            </b><br>
+                            &#8377;<%=(listing.price || 0 ).toLocaleString('en-IN')%>/rupee
+                        </p>
+                    </div>
+                </a>
+            </div>
+            <%}%>
+    </div>
