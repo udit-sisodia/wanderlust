@@ -13,8 +13,8 @@ const upload = multer({ storage })
 router.get("/", wrapAsync(listingControllers.index));
 
 //new route
-console.log("typeof showListing:", typeof listingControllers.showListing); // should be 'function'
-console.log("typeof wrapAsync:", typeof wrapAsync); // should be 'function'
+// console.log("typeof showListing:", typeof listingControllers.showListing); // should be 'function'
+// console.log("typeof wrapAsync:", typeof wrapAsync); // should be 'function'
 router.get("/new",isLoggedIn,listingControllers.renderNewForm);
 
 

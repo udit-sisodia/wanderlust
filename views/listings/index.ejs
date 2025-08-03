@@ -5,7 +5,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
+            gap: 1rem;
             margin-bottom: 1rem;
         }
 
@@ -68,29 +68,36 @@
             , "Camping" , "Farms" , "Arctic" ]; %>
             <% categories.forEach(cat=> { %>
                 <a href="/listings?category=<%= cat %>" class="filter <%= category === cat ? 'active' : '' %>">
-                    <% if(cat==="Trending" || cat==="Mountains" ) { %>
+                    <% if (cat==="Trending" ) { %>
                         <div><i class="fa-solid fa-fire"></i></div>
-                        <% } else if(cat==="Rooms" || cat==="Castles" || cat==="Camping" ) { %>
+                        <% } else if (cat==="Rooms" ) { %>
                             <div><i class="fa-solid fa-bed"></i></div>
-                            <% } else { %>
+                            <% } else if (cat==="Iconic Cities" ) { %>
                                 <div><i class="fa-solid fa-city"></i></div>
-                                <% } %>
-                                    <p>
-                                        <%= cat %>
-                                    </p>
+                                <% } else if (cat==="Mountains" ) { %>
+                                    <div><i class="fa-solid fa-mountain"></i></div>
+                                    <% } else if (cat==="Castles" ) { %>
+                                        <div><i class="fa-brands fa-fort-awesome"></i></div>
+                                        <% } else if (cat==="Amazing Pools" ) { %>
+                                            <div><i class="fa-solid fa-person-swimming"></i></div>
+                                            <% } else if (cat==="Camping" ) { %>
+                                                <div><i class="fa-solid fa-campground"></i></div>
+                                                <% } else if (cat==="Farms" ) { %>
+                                                    <div><i class="fa-solid fa-cow"></i></div>
+                                                    <% } else if (cat==="Arctic" ) { %>
+                                                        <div><i class="fa-solid fa-snowflake"></i></div>
+                                                        <% } %>
+                                                            <p>
+                                                                <%= cat %>
+                                                            </p>
                 </a>
                 <% }) %>
-
                     <!-- Show All Button -->
                     <a href="/listings" class="filter <%= !category ? 'active' : '' %>">
                         <div><i class="fa-solid fa-globe"></i></div>
                         <p>Show All</p>
                     </a>
     </div>
-
-
-
-
 
     <div class="row new row-cols-lg-3 row-cols-md-3 col-row-sm-1">
         <% for(let listing of allListings){%>
